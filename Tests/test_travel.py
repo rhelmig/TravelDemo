@@ -11,6 +11,8 @@ from selenium.webdriver.support import expected_conditions as ec
 @mark.smoke
 def test_start_page(driver):
     assert driver.title == 'BlazeDemo'
+    assert ('Choose your departure city:' in driver.page_source)
+    print('text present')
 
 
 def test_select_departure_city(driver):
@@ -82,4 +84,5 @@ def test_confirmation_page_loaded(driver):
     WebDriverWait(driver, 10).until(ec.presence_of_element_located(
         (By.XPATH, "/html/body//h1[.='Thank you for your purchase today!']")))
     assert driver.current_url == 'http://blazedemo.com/confirmation.php'
+    assert ('Thank you for your purchase today!' in driver.page_source)
     print('Flight confirmation confirmed')
