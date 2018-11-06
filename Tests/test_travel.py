@@ -9,28 +9,33 @@ from selenium.webdriver.support import expected_conditions as ec
 
 # Select departure and arrival
 @mark.smoke
+@mark.functional
 def test_start_page(driver):
     assert driver.title == 'BlazeDemo'
     assert ('Choose your departure city:' in driver.page_source)
     print('text present')
 
 
+@mark.functional
 def test_select_departure_city(driver):
     Select(driver.find_element_by_css_selector(
         'body > div.container > form > select:nth-child(1)')).select_by_visible_text('Boston')
 
 
+@mark.functional
 def test_select_arrival_city(driver):
     Select(driver.find_element_by_css_selector(
         'body > div.container > form > select:nth-child(4)')).select_by_visible_text('Dublin')
 
 
+@mark.functional
 def test_button_find_flights(driver):
     driver.find_element_by_css_selector('input').click()
 
 
 ###################################################################
 # Choose a flight
+@mark.functional
 def test_choose_flight_page_loaded(driver):
     WebDriverWait(driver, 10).until(ec.presence_of_element_located(
         (By.CSS_SELECTOR, 'body .container:nth-of-type(2)')))
@@ -38,6 +43,7 @@ def test_choose_flight_page_loaded(driver):
     print('Choose a flight page was loaded')
 
 
+@mark.functional
 def test_choose_a_flight(driver):
     bottom_flight = "tbody tr:nth-of-type(5) [value='Choose This Flight']"
     driver.find_element_by_css_selector(bottom_flight).click()
@@ -45,13 +51,14 @@ def test_choose_a_flight(driver):
 
 ####################################################################
 # Enter User Info
+@mark.functional
 def test_purchase_page_loaded(driver):
     WebDriverWait(driver, 10).until(ec.presence_of_element_located(
         (By.CSS_SELECTOR, "[type='submit']")))
     assert driver.current_url == 'http://blazedemo.com/purchase.php'
     print('Purchase page was loaded')
 
-
+@mark.functional
 def test_user_info_input(driver):
     driver.find_element_by_id('inputName').send_keys('Sam Smith')
     driver.find_element_by_id('address').send_keys('123 Maple St')
@@ -60,6 +67,7 @@ def test_user_info_input(driver):
     driver.find_element_by_id('zipCode').send_keys('30019')
 
 
+@mark.functional
 def test_payment_information(driver):
     Select(driver.find_element_by_id('cardType')).select_by_value('amex')
     driver.find_element_by_id('creditCardNumber').send_keys('432143214321')
@@ -70,16 +78,19 @@ def test_payment_information(driver):
     driver.find_element_by_id('nameOnCard').send_keys('Sam R. Smith')
 
 
+@mark.functional
 def test_remember_me_option(driver):
     driver.find_element_by_id('rememberMe').click()
 
 
+@mark.functional
 def test_purchase_flight_button(driver):
     driver.find_element_by_css_selector("[type='submit']").click()
 
 
 #######################################################################
 # Confirmation page is loaded
+@mark.functional
 def test_confirmation_page_loaded(driver):
     WebDriverWait(driver, 10).until(ec.presence_of_element_located(
         (By.XPATH, "/html/body//h1[.='Thank you for your purchase today!']")))
