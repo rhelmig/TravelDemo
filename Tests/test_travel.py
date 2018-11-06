@@ -58,6 +58,7 @@ def test_purchase_page_loaded(driver):
     assert driver.current_url == 'http://blazedemo.com/purchase.php'
     print('Purchase page was loaded')
 
+
 @mark.functional
 def test_user_info_input(driver):
     driver.find_element_by_id('inputName').send_keys('Sam Smith')
