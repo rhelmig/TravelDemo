@@ -4,7 +4,11 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as ec
 
-# pytest -v -s --html=report.html
+'''
+pytest -v -s --html=report.html
+
+NOTES: General smoke test for a travel site.  Books and confirms all travel details.
+'''
 
 
 # Select departure and arrival
@@ -33,7 +37,6 @@ def test_button_find_flights(driver):
     driver.find_element_by_css_selector('input').click()
 
 
-###################################################################
 # Choose a flight
 @mark.functional
 def test_choose_flight_page_loaded(driver):
@@ -49,7 +52,6 @@ def test_choose_a_flight(driver):
     driver.find_element_by_css_selector(bottom_flight).click()
 
 
-####################################################################
 # Enter User Info
 @mark.functional
 def test_purchase_page_loaded(driver):
@@ -89,7 +91,6 @@ def test_purchase_flight_button(driver):
     driver.find_element_by_css_selector("[type='submit']").click()
 
 
-#######################################################################
 # Confirmation page is loaded
 @mark.functional
 def test_confirmation_page_loaded(driver):
